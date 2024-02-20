@@ -44,8 +44,37 @@ function writeToFile(fileName, data) {
 
 // function to initialize program
 function init() {
+    function writeToFile(fileName, data) {
+        // Use path.join to ensure compatibility across different operating systems
+        const filePath = path.join(process.cwd(), fileName);
+      
+        // Use fs.writeFileSync to write the content to the file
+        fs.writeFileSync(filePath, data);
+      
+        console.log(`File created successfully at ${filePath}`);
+      }
+      
+      module.exports = writeToFile;
   // This function is currently empty, you might want to implement it
 }
 
 // function call to initialize program
+function init() {
+    inquirer
+      .prompt(questions)
+      .then((answers) => {
+        // Generate README content using the provided answers
+        const readmeContent = generateMarkdown(answers);
+  
+        // Specify the file name for the generated README
+        const fileName = "README.md";
+  
+        // Write the content to the file
+        writeToFile(fileName, readmeContent);
+      })
+      .catch((error) => {
+        console.error("Error during initialization:", error);
+      });
+  }
+  
 init();
