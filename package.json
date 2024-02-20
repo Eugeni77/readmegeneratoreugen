@@ -10,7 +10,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "inquirer": "^8.0.0",
-    "uuid": "^9.0.1"
+    "inquirer": "^8.0.0"
   }
 }
