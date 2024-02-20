@@ -45,16 +45,12 @@ function writeToFile(fileName, data) {
 // function to initialize program
 function init() {
     function writeToFile(fileName, data) {
-        // Use path.join to ensure compatibility across different operating systems
         const filePath = path.join(process.cwd(), fileName);
-      
-        // Use fs.writeFileSync to write the content to the file
         fs.writeFileSync(filePath, data);
-      
         console.log(`File created successfully at ${filePath}`);
       }
       
-      module.exports = writeToFile;
+      
   // This function is currently empty, you might want to implement it
 }
 
