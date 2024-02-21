@@ -22,55 +22,46 @@ const questions = [
   },
   {
     type: "input",
-    name: "Contributing",
+    name: "contributing",
     message: "Who contributed to this project",
   },
   {
     type: "input",
-    name: "Usage",
+    name: "usage",
     message: "How to use this project",
   },
   {
     type: "input",
-    name: "Installation",
+    name: "installation",
     message: "How to install this project",
   },
 ];
 
 // function to write README file
 function writeToFile(fileName, data) {
-  // This function is currently empty, you might want to implement it
+  const filePath = path.join(process.cwd(), fileName);
+  fs.writeFileSync(filePath, data);
+  console.log(`File created successfully at ${filePath}`);
 }
 
 // function to initialize program
 function init() {
-    function writeToFile(fileName, data) {
-        const filePath = path.join(process.cwd(), fileName);
-        fs.writeFileSync(filePath, data);
-        console.log(`File created successfully at ${filePath}`);
-      }
-      
-      
-  // This function is currently empty, you might want to implement it
+  inquirer
+    .prompt(questions)
+    .then((answers) => {
+      // Generate README content using the provided answers
+      const readmeContent = generateMarkdown(answers);
+
+      // Specify the file name for the generated README
+      const fileName = "README.md";
+
+      // Write the content to the file
+      writeToFile(fileName, readmeContent);
+    })
+    .catch((error) => {
+      console.error("Error during initialization:", error);
+    });
 }
 
 // function call to initialize program
-function init() {
-    inquirer
-      .prompt(questions)
-      .then((answers) => {
-        // Generate README content using the provided answers
-        const readmeContent = generateMarkdown(answers);
-  
-        // Specify the file name for the generated README
-        const fileName = "README.md";
-  
-        // Write the content to the file
-        writeToFile(fileName, readmeContent);
-      })
-      .catch((error) => {
-        console.error("Error during initialization:", error);
-      });
-  }
-  
 init();
